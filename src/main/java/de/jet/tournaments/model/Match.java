@@ -1,0 +1,88 @@
+package de.jet.tournaments.model;
+
+import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Match
+{
+	private String id;
+
+	@Valid
+	private Team team1;
+
+	@Valid
+	private Team team2;
+
+	private String team1Score = "---";
+	private String team2Score = "---";
+	private String tableName;
+
+	public Match()
+	{
+	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+
+	public Team getTeam1()
+	{
+		return team1;
+	}
+
+	public void setTeam1(Team team1)
+	{
+		this.team1 = team1;
+	}
+
+	public Team getTeam2()
+	{
+		return team2;
+	}
+
+	public void setTeam2(Team team2)
+	{
+		this.team2 = team2;
+	}
+
+	public String getTeam1Score()
+	{
+		return team1Score;
+	}
+
+	public void setTeam1Score(String team1Score)
+	{
+		this.team1Score = team1Score;
+	}
+
+	public String getTeam2Score()
+	{
+		return team2Score;
+	}
+
+	public void setTeam2Score(String team2Score)
+	{
+		this.team2Score = team2Score;
+	}
+
+	public String getTableName()
+	{
+		return tableName;
+	}
+
+	public void setTableName(String tableName)
+	{
+		this.tableName = tableName;
+	}
+}
