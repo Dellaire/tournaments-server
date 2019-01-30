@@ -25,9 +25,11 @@ public class Round
 		return name;
 	}
 
-	public void setName(String name)
+	public Round setName(String name)
 	{
 		this.name = name;
+		
+		return this;
 	}
 
 	public List<Match> getMatches()
@@ -35,14 +37,18 @@ public class Round
 		return matches;
 	}
 
-	public void setMatches(List<Match> matches)
+	public Round setMatches(List<Match> matches)
 	{
 		this.matches = matches;
+		
+		return this;
 	}
 
-	public void addMatch(Match match)
+	public Round addMatch(Match match)
 	{
 		this.matches.add(match);
+		
+		return this;
 	}
 
 	public Set<Player> getPlayer()

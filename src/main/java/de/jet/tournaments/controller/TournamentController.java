@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import de.jet.tournaments.calculation.RoundCalculator;
 import de.jet.tournaments.exceptions.TournamentException;
-import de.jet.tournaments.matchmaking.calculation.RoundCalculator;
 import de.jet.tournaments.model.Match;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Tournament;

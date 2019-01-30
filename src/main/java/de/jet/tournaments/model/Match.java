@@ -31,9 +31,11 @@ public class Match
 		return id;
 	}
 
-	public void setId(String id)
+	public Match setId(String id)
 	{
 		this.id = id;
+		
+		return this;
 	}
 
 	public Team getTeam1()
@@ -41,9 +43,11 @@ public class Match
 		return team1;
 	}
 
-	public void setTeam1(Team team1)
+	public Match setTeam1(Team team1)
 	{
 		this.team1 = team1;
+		
+		return this;
 	}
 
 	public Team getTeam2()
@@ -51,9 +55,11 @@ public class Match
 		return team2;
 	}
 
-	public void setTeam2(Team team2)
+	public Match setTeam2(Team team2)
 	{
 		this.team2 = team2;
+		
+		return this;
 	}
 
 	public String getTeam1Score()
@@ -61,9 +67,11 @@ public class Match
 		return team1Score;
 	}
 
-	public void setTeam1Score(String team1Score)
+	public Match setTeam1Score(String team1Score)
 	{
 		this.team1Score = team1Score;
+		
+		return this;
 	}
 
 	public String getTeam2Score()
@@ -71,9 +79,11 @@ public class Match
 		return team2Score;
 	}
 
-	public void setTeam2Score(String team2Score)
+	public Match setTeam2Score(String team2Score)
 	{
 		this.team2Score = team2Score;
+		
+		return this;
 	}
 
 	public String getTableName()
@@ -81,8 +91,10 @@ public class Match
 		return tableName;
 	}
 
-	public void setTableName(String tableName)
+	public Match setTableName(String tableName)
 	{
 		this.tableName = tableName;
+		
+		return this;
 	}
 }

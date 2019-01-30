@@ -1,4 +1,4 @@
-package de.jet.tournaments.matchmaking.calculation;
+package de.jet.tournaments.calculation;
 
 import java.util.ArrayList;
 import java.util.List;

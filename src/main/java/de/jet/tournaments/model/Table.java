@@ -24,9 +24,11 @@ public class Table
 		return id;
 	}
 
-	public void setId(String id)
+	public Table setId(String id)
 	{
 		this.id = id;
+		
+		return this;
 	}
 
 	public String getName()
@@ -34,9 +36,11 @@ public class Table
 		return name;
 	}
 
-	public void setName(String name)
+	public Table setName(String name)
 	{
 		this.name = name;
+		
+		return this;
 	}
 
 	public boolean isActive()
@@ -44,8 +48,10 @@ public class Table
 		return active;
 	}
 
-	public void setActive(boolean active)
+	public Table setActive(boolean active)
 	{
 		this.active = active;
+		
+		return this;
 	}
 }
