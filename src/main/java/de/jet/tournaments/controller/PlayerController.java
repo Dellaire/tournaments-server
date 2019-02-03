@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,25 +22,25 @@ public class PlayerController {
 
 	@Autowired
 	public PlayerController(PlayerDataStore playerDataStore) {
+		
 		this.playerDataStore = Objects.requireNonNull(playerDataStore);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Player> postPlayer(@RequestBody Player player) {
-		HttpHeaders httpHeaders = new HttpHeaders();
 
-		return new ResponseEntity<Player>(this.playerDataStore.postPlayer(player), httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<Player>(this.playerDataStore.postPlayer(player), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Player> putPlayer(@RequestBody Player player) {
-		HttpHeaders httpHeaders = new HttpHeaders();
 
-		return new ResponseEntity<Player>(this.playerDataStore.putPlayer(player), httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<Player>(this.playerDataStore.putPlayer(player), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Player>> getPlayer() {
+		
 		return new ResponseEntity<List<Player>>(this.playerDataStore.getPlayers(), HttpStatus.OK);
 	}
 }

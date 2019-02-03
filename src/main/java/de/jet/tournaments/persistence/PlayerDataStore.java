@@ -10,9 +10,9 @@ import de.jet.tournaments.model.Player;
 @Component
 public class PlayerDataStore
 {
-	private final PlayersRepository playerRepository;
+	private final PlayerRepository playerRepository;
 
-	public PlayerDataStore(PlayersRepository playerRepository)
+	public PlayerDataStore(PlayerRepository playerRepository)
 	{
 		this.playerRepository = Objects.requireNonNull(playerRepository);
 	}

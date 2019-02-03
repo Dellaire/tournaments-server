@@ -16,7 +16,7 @@ import de.jet.tournaments.model.Table;
 import de.jet.tournaments.persistence.TableDataStore;
 
 @RestController
-@RequestMapping(value = "/table")
+@RequestMapping(value = "/tables")
 public class TableController {
 	private final TableDataStore tableDataStore;
 
