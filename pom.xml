@@ -1,8 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.jet.tournamentmaker</groupId>
-	<artifactId>tournament</artifactId>
+	<artifactId>tournament-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -14,6 +15,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<!--docker.push.registry></docker.push.registry -->
 	</properties>
 
 	<dependencies>
@@ -26,7 +28,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -37,19 +39,58 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.27.2</version>
+				<configuration>
+					<images>
+						<image>
+							<name>tournament-server</name>
+							<build>
+								<from>java:8</from>
+								<tags>
+									<tag>${project.version}</tag>
+									<tag>latest</tag>
+								</tags>
+								<assembly>
+									<descriptorRef>artifact</descriptorRef>
+									<inline>
+										<dependencySets>
+											<dependencySet>
+												<includes>
+													<include>de.jet.tournamentmaker:tournament-server</include>
+												</includes>
+												<outputFileNameMapping>tournament-server.jar</outputFileNameMapping>
+											</dependencySet>
+										</dependencySets>
+									</inline>
+								</assembly>
+								<entryPoint>
+									<exec>
+										<arg>java</arg>
+										<arg>-jar</arg>
+										<arg>/maven/tournament-server.jar</arg>
+									</exec>
+								</entryPoint>
+							</build>
+						</image>
+					</images>
+				</configuration>
 				<executions>
 					<execution>
+						<id>build</id>
+						<phase>package</phase>
 						<goals>
-							<goal>repackage</goal>
+							<goal>build</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 

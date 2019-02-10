@@ -5,4 +5,11 @@ services:
   mongodb:
     image: mongo:4.0.5
     ports:
-      - "27017:27017"
+      - 27017:27017
+      
+  tournament-server:
+    image: tournament-server:latest
+    depends_on:
+      - mongodb
+    ports:
+      - 8080:8080
