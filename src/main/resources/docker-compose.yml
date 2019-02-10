@@ -9,6 +9,8 @@ services:
       
   tournament-server:
     image: tournament-server:latest
+    environment:
+      - profile=testdata
     depends_on:
       - mongodb
     ports:
