@@ -17,30 +17,35 @@ import de.jet.tournaments.persistence.TableDataStore;
 
 @RestController
 @RequestMapping(value = "/tables")
-public class TableController {
+public class TableController
+{
 	private final TableDataStore tableDataStore;
 
 	@Autowired
-	public TableController(TableDataStore tableDataStore) {
+	public TableController(TableDataStore tableDataStore)
+	{
 		this.tableDataStore = Objects.requireNonNull(tableDataStore);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Table> postTable(@RequestBody Table table) {
+	public ResponseEntity<Table> postTable(@RequestBody Table table)
+	{
 		HttpHeaders httpHeaders = new HttpHeaders();
 
 		return new ResponseEntity<Table>(this.tableDataStore.postTable(table), httpHeaders, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Table> putTable(@RequestBody Table table) {
+	public ResponseEntity<Table> putTable(@RequestBody Table table)
+	{
 		HttpHeaders httpHeaders = new HttpHeaders();
 
 		return new ResponseEntity<Table>(this.tableDataStore.putTable(table), httpHeaders, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Table>> getTable() {
+	public ResponseEntity<List<Table>> getTable()
+	{
 		return new ResponseEntity<List<Table>>(this.tableDataStore.getTables(), HttpStatus.OK);
 	}
 }

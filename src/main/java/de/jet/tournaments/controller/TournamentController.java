@@ -90,8 +90,7 @@ public class TournamentController
 	}
 
 	@RequestMapping(value = "/tournaments/{tournamentId}/rounds/generate", method = RequestMethod.PUT)
-	public ResponseEntity<Round> putGeneratedRound(@PathVariable String tournamentId)
-			throws JsonProcessingException
+	public ResponseEntity<Round> putGeneratedRound(@PathVariable String tournamentId) throws JsonProcessingException
 	{
 		// TODO move number calculation to other place
 		Optional<Integer> lastRoundNumber = tournamentDataStore.getTournamentById(tournamentId).getRounds().stream()

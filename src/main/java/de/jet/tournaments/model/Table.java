@@ -27,7 +27,7 @@ public class Table
 	public Table setId(String id)
 	{
 		this.id = id;
-		
+
 		return this;
 	}
 
@@ -39,7 +39,7 @@ public class Table
 	public Table setName(String name)
 	{
 		this.name = name;
-		
+
 		return this;
 	}
 
@@ -51,7 +51,7 @@ public class Table
 	public Table setActive(boolean active)
 	{
 		this.active = active;
-		
+
 		return this;
 	}
 }

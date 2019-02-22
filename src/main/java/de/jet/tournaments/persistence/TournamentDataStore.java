@@ -28,8 +28,7 @@ public class TournamentDataStore
 	private final MongoTemplate mongoTemplate;
 
 	@Autowired
-	public TournamentDataStore(TournamentRepository tournamentRepository,
-			MongoTemplate mongoTemplate)
+	public TournamentDataStore(TournamentRepository tournamentRepository, MongoTemplate mongoTemplate)
 	{
 		this.tournamentRepository = Objects.requireNonNull(tournamentRepository);
 		this.mongoTemplate = Objects.requireNonNull(mongoTemplate);
@@ -180,8 +179,7 @@ public class TournamentDataStore
 	 * @throws JsonProcessingException
 	 * @throws AmqpException
 	 */
-	public Match putMatch(String tournamentId, String roundId, Match match)
-			throws JsonProcessingException
+	public Match putMatch(String tournamentId, String roundId, Match match) throws JsonProcessingException
 	{
 		this.mongoTemplate.updateFirst(
 				Query.query(

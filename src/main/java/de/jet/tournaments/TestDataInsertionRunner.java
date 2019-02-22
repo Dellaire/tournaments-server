@@ -14,22 +14,24 @@ import de.jet.tournaments.persistence.TableRepository;
 
 @Component
 @Profile("testdata")
-public class TestDataInsertionRunner implements CommandLineRunner {
+public class TestDataInsertionRunner implements CommandLineRunner
+{
 
 	@Autowired
 	private PlayerController playerController;
-	
+
 	@Autowired
 	private TableController tableController;
-	
+
 	@Autowired
 	private PlayerRepository playersRepository;
-	
+
 	@Autowired
 	private TableRepository tableRepository;
-	
+
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception
+	{
 
 		Player player1 = new Player().setName("Henry").setScore(42).setElo(42).setActive(true);
 		Player player2 = new Player().setName("Huy").setScore(42).setElo(42).setActive(true);
@@ -41,12 +43,12 @@ public class TestDataInsertionRunner implements CommandLineRunner {
 		this.playerController.postPlayer(player2);
 		this.playerController.postPlayer(player3);
 		this.playerController.postPlayer(player4);
-		
+
 		Table table1 = new Table().setName("Leonhard").setActive(true);
 		Table table2 = new Table().setName("Ullrich").setActive(true);
 		Table table3 = new Table().setName("Lehmacher").setActive(true);
 		Table table4 = new Table().setName("Lettner").setActive(true);
-		
+
 		this.tableRepository.deleteAll();
 		this.tableController.postTable(table1);
 		this.tableController.postTable(table2);

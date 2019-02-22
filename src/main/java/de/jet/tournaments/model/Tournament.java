@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,8 +16,6 @@ public class Tournament
 	private String id;
 
 	private String name;
-
-	@Valid
 	private List<Round> rounds = new ArrayList<Round>();
 
 	public Tournament()
@@ -35,7 +31,7 @@ public class Tournament
 	public Tournament setId(String id)
 	{
 		this.id = id;
-		
+
 		return this;
 	}
 
@@ -48,7 +44,7 @@ public class Tournament
 	{
 		this.rounds.clear();
 		this.rounds.addAll(rounds);
-		
+
 		return this;
 	}
 
@@ -60,10 +56,10 @@ public class Tournament
 	public Tournament setName(String name)
 	{
 		this.name = name;
-		
+
 		return this;
 	}
-	
+
 	public List<Player> getPlayer()
 	{
 		List<Match> allMatches = new ArrayList<Match>();

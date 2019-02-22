@@ -6,18 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
-
 public class Round
 {
 	private String name;
-
-	@Valid
 	private List<Match> matches = new ArrayList<Match>();
 
 	public Round()
 	{
-
 	}
 
 	public String getName()
@@ -28,7 +23,7 @@ public class Round
 	public Round setName(String name)
 	{
 		this.name = name;
-		
+
 		return this;
 	}
 
@@ -40,14 +35,14 @@ public class Round
 	public Round setMatches(List<Match> matches)
 	{
 		this.matches = matches;
-		
+
 		return this;
 	}
 
 	public Round addMatch(Match match)
 	{
 		this.matches.add(match);
-		
+
 		return this;
 	}
 

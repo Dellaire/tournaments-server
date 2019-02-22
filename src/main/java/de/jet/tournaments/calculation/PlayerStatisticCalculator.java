@@ -60,15 +60,13 @@ public class PlayerStatisticCalculator
 			team1Player2Statistic.addWins(1);
 			team2Player1Statistic.addDefeats(1);
 			team2Player2Statistic.addDefeats(1);
-		}
-		else if (Integer.parseInt(match.getTeam1Score()) < Integer.parseInt(match.getTeam2Score()))
+		} else if (Integer.parseInt(match.getTeam1Score()) < Integer.parseInt(match.getTeam2Score()))
 		{
 			team1Player1Statistic.addDefeats(1);
 			team1Player2Statistic.addDefeats(1);
 			team2Player1Statistic.addWins(1);
 			team2Player2Statistic.addWins(1);
-		}
-		else
+		} else
 		{
 			team1Player1Statistic.addDraws(1);
 			team1Player2Statistic.addDraws(1);

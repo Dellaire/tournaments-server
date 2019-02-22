@@ -1,7 +1,5 @@
 package de.jet.tournaments.model;
 
-import javax.validation.Valid;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -10,12 +8,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Match
 {
+
 	private String id;
-
-	@Valid
 	private Team team1;
-
-	@Valid
 	private Team team2;
 
 	private String team1Score = "---";
@@ -34,7 +29,7 @@ public class Match
 	public Match setId(String id)
 	{
 		this.id = id;
-		
+
 		return this;
 	}
 
@@ -46,7 +41,7 @@ public class Match
 	public Match setTeam1(Team team1)
 	{
 		this.team1 = team1;
-		
+
 		return this;
 	}
 
@@ -58,7 +53,7 @@ public class Match
 	public Match setTeam2(Team team2)
 	{
 		this.team2 = team2;
-		
+
 		return this;
 	}
 
@@ -70,7 +65,7 @@ public class Match
 	public Match setTeam1Score(String team1Score)
 	{
 		this.team1Score = team1Score;
-		
+
 		return this;
 	}
 
@@ -82,7 +77,7 @@ public class Match
 	public Match setTeam2Score(String team2Score)
 	{
 		this.team2Score = team2Score;
-		
+
 		return this;
 	}
 
@@ -94,7 +89,7 @@ public class Match
 	public Match setTableName(String tableName)
 	{
 		this.tableName = tableName;
-		
+
 		return this;
 	}
 }

@@ -7,9 +7,11 @@ import java.util.stream.Collectors;
 
 import de.jet.tournaments.model.Player;
 
-public class PlayerPrioritizer {
+public class PlayerPrioritizer
+{
 
-	public static List<Player> prioritizePlayer(List<Player> playerToBePrioritized) {
+	public static List<Player> prioritizePlayer(List<Player> playerToBePrioritized)
+	{
 
 		Integer maxSkippedRounds = playerToBePrioritized.stream()
 				.max((player1, player2) -> ((Integer) player1.getSkippedRounds()).compareTo(player2.getSkippedRounds()))
