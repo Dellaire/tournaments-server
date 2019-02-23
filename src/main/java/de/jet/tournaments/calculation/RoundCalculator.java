@@ -15,31 +15,31 @@ import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Table;
 import de.jet.tournaments.model.Team;
-import de.jet.tournaments.persistence.PlayerDataStore;
 import de.jet.tournaments.persistence.TableDataStore;
+import de.jet.tournaments.persistence.TournamentDataStore;
 
 @Component
 public class RoundCalculator
 {
-	private final PlayerDataStore playerDataStore;
+	private final TournamentDataStore tournamentDataStore;
 	private final SkippedRoundsCalculator skippedRoundsCalculator;
 	private final TableDataStore tableDataStore;
 
 	@Autowired
-	public RoundCalculator(PlayerDataStore playerDataStore, SkippedRoundsCalculator skippedRoundsCalculator,
+	public RoundCalculator(TournamentDataStore tournamentDataStore, SkippedRoundsCalculator skippedRoundsCalculator,
 			TableDataStore tableDataStore)
 	{
-		this.playerDataStore = Objects.requireNonNull(playerDataStore);
+		this.tournamentDataStore = Objects.requireNonNull(tournamentDataStore);
 		this.skippedRoundsCalculator = skippedRoundsCalculator;
 		this.tableDataStore = tableDataStore;
 	}
 
-	public Round generateNewRound(String tournamentId)
+	public Round generateNewRound(String tournamentName)
 	{
-		List<Player> activePlayer = this.playerDataStore.getPlayers().stream().filter(player -> player.isActive())
-				.collect(Collectors.toList());
+		List<Player> activePlayer = this.tournamentDataStore.getTournamentByName(tournamentName).getPlayer().stream()
+				.filter(player -> player.isActive()).collect(Collectors.toList());
 
-		this.skippedRoundsCalculator.calculateSkippedRounds(activePlayer, tournamentId);
+		this.skippedRoundsCalculator.calculateSkippedRounds(activePlayer, tournamentName);
 
 		List<Player> prioritizedPlayer = PlayerPrioritizer.prioritizePlayer(activePlayer);
 

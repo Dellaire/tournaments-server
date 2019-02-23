@@ -18,28 +18,18 @@ import de.jet.tournaments.persistence.PlayerDataStore;
 @RequestMapping(value = "/player")
 public class PlayerController
 {
-
 	private final PlayerDataStore playerDataStore;
 
 	@Autowired
 	public PlayerController(PlayerDataStore playerDataStore)
 	{
-
 		this.playerDataStore = Objects.requireNonNull(playerDataStore);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Player> postPlayer(@RequestBody Player player)
 	{
-
 		return new ResponseEntity<Player>(this.playerDataStore.postPlayer(player), HttpStatus.OK);
-	}
-
-	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Player> putPlayer(@RequestBody Player player)
-	{
-
-		return new ResponseEntity<Player>(this.playerDataStore.putPlayer(player), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

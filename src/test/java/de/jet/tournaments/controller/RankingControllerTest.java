@@ -33,7 +33,10 @@ public class RankingControllerTest
 	private Round round4 = this.createRound(this.player1, this.player2, this.player3, this.player5, "6", "5");
 	private Round round5 = this.createRound(this.player1, this.player2, this.player3, this.player4, "1", "6");
 
-	private Tournament tournament = new Tournament().setRounds(Arrays.asList(round1, round2, round3, round4, round5));
+	private Tournament tournament = new Tournament().setRounds(Arrays.asList(round1, round2, round3, round4, round5))
+			.setPlayer(Arrays.asList(new Player().setId("1").setName("one"), new Player().setId("2").setName("two"),
+					new Player().setId("3").setName("three"), new Player().setId("4").setName("four"),
+					new Player().setId("5").setName("five")));
 
 	@Test
 	public void getRankingWithLinearScoring()

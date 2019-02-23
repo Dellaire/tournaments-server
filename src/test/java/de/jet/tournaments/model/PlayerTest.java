@@ -20,7 +20,9 @@ public class PlayerTest
 	private Round round5 = this.createRound(new Player().setId("one"), new Player().setId("two"),
 			new Player().setId("three"), new Player().setId("four"), "1", "6");
 
-	private Tournament tournament = new Tournament().setRounds(Arrays.asList(round1, round2, round3, round4, round5));
+	private Tournament tournament = new Tournament().setRounds(Arrays.asList(round1, round2, round3, round4, round5))
+			.setPlayer(Arrays.asList(new Player().setId("one"), new Player().setId("two"), new Player().setId("three"),
+					new Player().setId("four"), new Player().setId("five")));
 
 	@Test
 	public void retrieveUniquePlayerFromTournament()

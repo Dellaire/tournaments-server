@@ -16,8 +16,8 @@ import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Table;
 import de.jet.tournaments.model.Team;
-import de.jet.tournaments.persistence.PlayerDataStore;
 import de.jet.tournaments.persistence.TableDataStore;
+import de.jet.tournaments.persistence.TournamentDataStore;
 
 public class AddTablesToRoundTest
 {
@@ -53,7 +53,7 @@ public class AddTablesToRoundTest
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(PlayerDataStore.class),
+		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(TournamentDataStore.class),
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round roundWithTables = roundCalculator.addTablesToRound(round);
 
@@ -95,7 +95,7 @@ public class AddTablesToRoundTest
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(PlayerDataStore.class),
+		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(TournamentDataStore.class),
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round roundWithTables = roundCalculator.addTablesToRound(round);
 
@@ -138,7 +138,7 @@ public class AddTablesToRoundTest
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(PlayerDataStore.class),
+		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(TournamentDataStore.class),
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round roundWithTables = roundCalculator.addTablesToRound(round);
 
@@ -181,7 +181,7 @@ public class AddTablesToRoundTest
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(PlayerDataStore.class),
+		RoundCalculator roundCalculator = new RoundCalculator(Mockito.mock(TournamentDataStore.class),
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round roundWithTables = roundCalculator.addTablesToRound(round);
 

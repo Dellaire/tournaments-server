@@ -15,33 +15,37 @@ import de.jet.tournaments.model.Match;
 import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Table;
-import de.jet.tournaments.persistence.PlayerDataStore;
+import de.jet.tournaments.model.Tournament;
 import de.jet.tournaments.persistence.TableDataStore;
+import de.jet.tournaments.persistence.TournamentDataStore;
 
 public class GenerateNewRoundTest
 {
 	@Test
 	public void generateNewRoundWithNoSkip()
 	{
-		List<Player> players = new ArrayList<Player>();
-		players.add(new Player().setName("P1"));
-		players.add(new Player().setName("P2"));
-		players.add(new Player().setName("P3"));
-		players.add(new Player().setName("P4"));
-		players.add(new Player().setName("P5"));
-		players.add(new Player().setName("P6"));
-		players.add(new Player().setName("P7"));
-		players.add(new Player().setName("P8"));
+		List<Player> player = new ArrayList<Player>();
+		player.add(new Player().setName("P1"));
+		player.add(new Player().setName("P2"));
+		player.add(new Player().setName("P3"));
+		player.add(new Player().setName("P4"));
+		player.add(new Player().setName("P5"));
+		player.add(new Player().setName("P6"));
+		player.add(new Player().setName("P7"));
+		player.add(new Player().setName("P8"));
 
-		PlayerDataStore mockedPlayerDataStore = Mockito.mock(PlayerDataStore.class);
-		Mockito.when(mockedPlayerDataStore.getPlayers()).thenReturn(players);
+		Tournament tournament = new Tournament();
+		tournament.setPlayer(player);
+
+		TournamentDataStore mockedTournamentDataStore = Mockito.mock(TournamentDataStore.class);
+		Mockito.when(mockedTournamentDataStore.getTournamentByName(Mockito.anyString())).thenReturn(tournament);
 
 		List<Table> tables = new ArrayList<Table>(Arrays.asList(new Table()));
 
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(mockedPlayerDataStore,
+		RoundCalculator roundCalculator = new RoundCalculator(mockedTournamentDataStore,
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round round = roundCalculator.generateNewRound("42");
 
@@ -51,24 +55,27 @@ public class GenerateNewRoundTest
 	@Test
 	public void generateNewRoundWithSkip()
 	{
-		List<Player> players = new ArrayList<Player>();
-		players.add(new Player().setName("P1"));
-		players.add(new Player().setName("P2"));
-		players.add(new Player().setName("P3"));
-		players.add(new Player().setName("P4"));
-		players.add(new Player().setName("P5"));
-		players.add(new Player().setName("P6"));
-		players.add(new Player().setName("P7"));
+		List<Player> player = new ArrayList<Player>();
+		player.add(new Player().setName("P1"));
+		player.add(new Player().setName("P2"));
+		player.add(new Player().setName("P3"));
+		player.add(new Player().setName("P4"));
+		player.add(new Player().setName("P5"));
+		player.add(new Player().setName("P6"));
+		player.add(new Player().setName("P7"));
 
-		PlayerDataStore mockedPlayerDataStore = Mockito.mock(PlayerDataStore.class);
-		Mockito.when(mockedPlayerDataStore.getPlayers()).thenReturn(players);
+		Tournament tournament = new Tournament();
+		tournament.setPlayer(player);
+
+		TournamentDataStore mockedTournamentDataStore = Mockito.mock(TournamentDataStore.class);
+		Mockito.when(mockedTournamentDataStore.getTournamentByName(Mockito.anyString())).thenReturn(tournament);
 
 		List<Table> tables = new ArrayList<Table>(Arrays.asList(new Table()));
 
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(mockedPlayerDataStore,
+		RoundCalculator roundCalculator = new RoundCalculator(mockedTournamentDataStore,
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round round = roundCalculator.generateNewRound("42");
 
@@ -78,25 +85,28 @@ public class GenerateNewRoundTest
 	@Test
 	public void notEnoghTables()
 	{
-		List<Player> players = new ArrayList<Player>();
-		players.add(new Player().setName("P1"));
-		players.add(new Player().setName("P2"));
-		players.add(new Player().setName("P3"));
-		players.add(new Player().setName("P4"));
-		players.add(new Player().setName("P5"));
-		players.add(new Player().setName("P6"));
-		players.add(new Player().setName("P7"));
-		players.add(new Player().setName("P8"));
+		List<Player> player = new ArrayList<Player>();
+		player.add(new Player().setName("P1"));
+		player.add(new Player().setName("P2"));
+		player.add(new Player().setName("P3"));
+		player.add(new Player().setName("P4"));
+		player.add(new Player().setName("P5"));
+		player.add(new Player().setName("P6"));
+		player.add(new Player().setName("P7"));
+		player.add(new Player().setName("P8"));
 
-		PlayerDataStore mockedPlayerDataStore = Mockito.mock(PlayerDataStore.class);
-		Mockito.when(mockedPlayerDataStore.getPlayers()).thenReturn(players);
+		Tournament tournament = new Tournament();
+		tournament.setPlayer(player);
+
+		TournamentDataStore mockedTournamentDataStore = Mockito.mock(TournamentDataStore.class);
+		Mockito.when(mockedTournamentDataStore.getTournamentByName(Mockito.anyString())).thenReturn(tournament);
 
 		List<Table> tables = new ArrayList<Table>(Arrays.asList(new Table().setName("42")));
 
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(mockedPlayerDataStore,
+		RoundCalculator roundCalculator = new RoundCalculator(mockedTournamentDataStore,
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round round = roundCalculator.generateNewRound("42");
 
@@ -110,18 +120,21 @@ public class GenerateNewRoundTest
 	@Test
 	public void ignoreInactiveTables()
 	{
-		List<Player> players = new ArrayList<Player>();
-		players.add(new Player().setName("P1"));
-		players.add(new Player().setName("P2"));
-		players.add(new Player().setName("P3"));
-		players.add(new Player().setName("P4"));
-		players.add(new Player().setName("P5"));
-		players.add(new Player().setName("P6"));
-		players.add(new Player().setName("P7"));
-		players.add(new Player().setName("P8"));
+		List<Player> player = new ArrayList<Player>();
+		player.add(new Player().setName("P1"));
+		player.add(new Player().setName("P2"));
+		player.add(new Player().setName("P3"));
+		player.add(new Player().setName("P4"));
+		player.add(new Player().setName("P5"));
+		player.add(new Player().setName("P6"));
+		player.add(new Player().setName("P7"));
+		player.add(new Player().setName("P8"));
 
-		PlayerDataStore mockedPlayerDataStore = Mockito.mock(PlayerDataStore.class);
-		Mockito.when(mockedPlayerDataStore.getPlayers()).thenReturn(players);
+		Tournament tournament = new Tournament();
+		tournament.setPlayer(player);
+
+		TournamentDataStore mockedTournamentDataStore = Mockito.mock(TournamentDataStore.class);
+		Mockito.when(mockedTournamentDataStore.getTournamentByName(Mockito.anyString())).thenReturn(tournament);
 
 		List<Table> tables = new ArrayList<Table>(
 				Arrays.asList(new Table().setName("42"), new Table().setName("43").setActive(false)));
@@ -129,7 +142,7 @@ public class GenerateNewRoundTest
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(mockedPlayerDataStore,
+		RoundCalculator roundCalculator = new RoundCalculator(mockedTournamentDataStore,
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round round = roundCalculator.generateNewRound("42");
 
@@ -143,25 +156,28 @@ public class GenerateNewRoundTest
 	@Test
 	public void ignoreInactivePlayer()
 	{
-		List<Player> players = new ArrayList<Player>();
-		players.add(new Player().setName("P1"));
-		players.add(new Player().setName("P2"));
-		players.add(new Player().setName("P3"));
-		players.add(new Player().setName("P4"));
-		players.add(new Player().setName("P5"));
-		players.add(new Player().setName("P6"));
-		players.add(new Player().setName("P7"));
-		players.add(new Player().setName("P8").setActive(false));
+		List<Player> player = new ArrayList<Player>();
+		player.add(new Player().setName("P1"));
+		player.add(new Player().setName("P2"));
+		player.add(new Player().setName("P3"));
+		player.add(new Player().setName("P4"));
+		player.add(new Player().setName("P5"));
+		player.add(new Player().setName("P6"));
+		player.add(new Player().setName("P7"));
+		player.add(new Player().setName("P8").setActive(false));
 
-		PlayerDataStore mockedPlayerDataStore = Mockito.mock(PlayerDataStore.class);
-		Mockito.when(mockedPlayerDataStore.getPlayers()).thenReturn(players);
+		Tournament tournament = new Tournament();
+		tournament.setPlayer(player);
+
+		TournamentDataStore mockedTournamentDataStore = Mockito.mock(TournamentDataStore.class);
+		Mockito.when(mockedTournamentDataStore.getTournamentByName(Mockito.anyString())).thenReturn(tournament);
 
 		List<Table> tables = new ArrayList<Table>(Arrays.asList(new Table().setName("42"), new Table().setName("43")));
 
 		TableDataStore tableDataStore = Mockito.mock(TableDataStore.class);
 		Mockito.when(tableDataStore.getTables()).thenReturn(tables);
 
-		RoundCalculator roundCalculator = new RoundCalculator(mockedPlayerDataStore,
+		RoundCalculator roundCalculator = new RoundCalculator(mockedTournamentDataStore,
 				Mockito.mock(SkippedRoundsCalculator.class), tableDataStore);
 		Round round = roundCalculator.generateNewRound("42");
 

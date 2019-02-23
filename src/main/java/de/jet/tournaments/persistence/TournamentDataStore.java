@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.jet.tournaments.model.Match;
+import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Tournament;
 
@@ -59,6 +60,14 @@ public class TournamentDataStore
 	public Tournament getTournamentByName(String name)
 	{
 		return this.tournamentRepository.findByName(name);
+	}
+	
+	public Player addPlayer(String tournamentName, Player player)
+	{
+		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
+				new Update().push("player", player), Tournament.class).getUpsertedId();
+		
+		return player;
 	}
 
 	public Round addRound(String tournamentId, Round round) throws JsonProcessingException

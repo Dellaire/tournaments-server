@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.jet.tournaments.calculation.RoundCalculator;
 import de.jet.tournaments.exceptions.TournamentException;
 import de.jet.tournaments.model.Match;
+import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Tournament;
 import de.jet.tournaments.persistence.TournamentDataStore;
@@ -87,6 +89,12 @@ public class TournamentController
 			throws JsonProcessingException
 	{
 		return new ResponseEntity<Round>(this.tournamentDataStore.addRound(tournamentId, round), HttpStatus.OK);
+	}
+
+	@PutMapping(value = "/tournaments/{tournamentId}/players")
+	public Player addPlayer(@PathVariable String tournamentName, @RequestBody Player player)
+	{
+		return this.tournamentDataStore.addPlayer(tournamentName, player);
 	}
 
 	@RequestMapping(value = "/tournaments/{tournamentId}/rounds/generate", method = RequestMethod.PUT)

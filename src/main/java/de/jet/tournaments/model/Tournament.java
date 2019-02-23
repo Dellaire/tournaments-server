@@ -1,10 +1,7 @@
 package de.jet.tournaments.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +14,7 @@ public class Tournament
 
 	private String name;
 	private List<Round> rounds = new ArrayList<Round>();
+	private List<Player> player = new ArrayList<Player>();
 
 	public Tournament()
 	{
@@ -62,15 +60,26 @@ public class Tournament
 
 	public List<Player> getPlayer()
 	{
-		List<Match> allMatches = new ArrayList<Match>();
-		this.rounds.stream().map(round -> round.getMatches()).forEach(matches -> allMatches.addAll(matches));
+		return this.player;
 
-		Set<Player> allPlayer = new HashSet<Player>();
-		allMatches.stream()
-				.map(match -> Arrays.asList(match.getTeam1().getPlayer1(), match.getTeam1().getPlayer2(),
-						match.getTeam2().getPlayer1(), match.getTeam2().getPlayer2()))
-				.forEach(player -> allPlayer.addAll(player));
+		// List<Match> allMatches = new ArrayList<Match>();
+		// this.rounds.stream().map(round -> round.getMatches()).forEach(matches ->
+		// allMatches.addAll(matches));
+		//
+		// Set<Player> allPlayer = new HashSet<Player>();
+		// allMatches.stream()
+		// .map(match -> Arrays.asList(match.getTeam1().getPlayer1(),
+		// match.getTeam1().getPlayer2(),
+		// match.getTeam2().getPlayer1(), match.getTeam2().getPlayer2()))
+		// .forEach(player -> allPlayer.addAll(player));
+		//
+		// return new ArrayList<Player>(allPlayer);
+	}
 
-		return new ArrayList<Player>(allPlayer);
+	public Tournament setPlayer(List<Player> player)
+	{
+		this.player = player;
+
+		return this;
 	}
 }

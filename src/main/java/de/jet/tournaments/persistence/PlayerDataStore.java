@@ -22,11 +22,6 @@ public class PlayerDataStore
 		return this.playerRepository.save(player);
 	}
 
-	public Player putPlayer(Player player)
-	{
-		return this.playerRepository.save(player);
-	}
-
 	public List<Player> getPlayers()
 	{
 		return this.playerRepository.findAll();
