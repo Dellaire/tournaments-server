@@ -91,7 +91,7 @@ public class TournamentController
 		return new ResponseEntity<Round>(this.tournamentDataStore.addRound(tournamentId, round), HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/tournaments/{tournamentId}/players")
+	@PutMapping(value = "/tournaments/{tournamentId}/player")
 	public Player addPlayer(@PathVariable String tournamentName, @RequestBody Player player)
 	{
 		return this.tournamentDataStore.addPlayer(tournamentName, player);
