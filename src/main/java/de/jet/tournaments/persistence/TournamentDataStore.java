@@ -61,12 +61,18 @@ public class TournamentDataStore
 	{
 		return this.tournamentRepository.findByName(name);
 	}
-	
+
+	public List<Player> readPlayer(String tournamentName)
+	{
+		return this.mongoTemplate.find(Query.query(Criteria.where("name").is(tournamentName)), Tournament.class)
+				.stream().findFirst().get().getPlayer();
+	}
+
 	public Player addPlayer(String tournamentName, Player player)
 	{
 		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
 				new Update().push("player", player), Tournament.class).getUpsertedId();
-		
+
 		return player;
 	}
 

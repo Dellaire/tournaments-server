@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,7 +92,13 @@ public class TournamentController
 		return new ResponseEntity<Round>(this.tournamentDataStore.addRound(tournamentId, round), HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/tournaments/{tournamentId}/player")
+	@GetMapping(value = "/tournaments/{tournamentName}/player")
+	public List<Player> getPlayer(@PathVariable String tournamentName)
+	{
+		return this.tournamentDataStore.readPlayer(tournamentName);
+	}
+
+	@PutMapping(value = "/tournaments/{tournamentName}/player")
 	public Player addPlayer(@PathVariable String tournamentName, @RequestBody Player player)
 	{
 		return this.tournamentDataStore.addPlayer(tournamentName, player);
