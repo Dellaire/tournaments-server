@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.jet.tournaments.model.Match;
 import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
+import de.jet.tournaments.model.Table;
 import de.jet.tournaments.model.Tournament;
 
 @Component
@@ -74,6 +75,20 @@ public class TournamentDataStore
 				new Update().push("player", player), Tournament.class).getUpsertedId();
 
 		return player;
+	}
+
+	public List<Table> readTables(String tournamentName)
+	{
+		return this.mongoTemplate.find(Query.query(Criteria.where("name").is(tournamentName)), Tournament.class)
+				.stream().findFirst().get().getTables();
+	}
+
+	public Table addTable(String tournamentName, Table table)
+	{
+		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
+				new Update().push("tables", table), Tournament.class).getUpsertedId();
+
+		return table;
 	}
 
 	public Round addRound(String tournamentId, Round round) throws JsonProcessingException

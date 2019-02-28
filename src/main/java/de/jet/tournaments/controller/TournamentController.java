@@ -26,6 +26,7 @@ import de.jet.tournaments.exceptions.TournamentException;
 import de.jet.tournaments.model.Match;
 import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
+import de.jet.tournaments.model.Table;
 import de.jet.tournaments.model.Tournament;
 import de.jet.tournaments.persistence.TournamentDataStore;
 
@@ -102,6 +103,18 @@ public class TournamentController
 	public Player addPlayer(@PathVariable String tournamentName, @RequestBody Player player)
 	{
 		return this.tournamentDataStore.addPlayer(tournamentName, player);
+	}
+
+	@GetMapping(value = "/tournaments/{tournamentName}/tables")
+	public List<Table> getTables(@PathVariable String tournamentName)
+	{
+		return this.tournamentDataStore.readTables(tournamentName);
+	}
+
+	@PutMapping(value = "/tournaments/{tournamentName}/tables")
+	public Table addTables(@PathVariable String tournamentName, @RequestBody Table table)
+	{
+		return this.tournamentDataStore.addTable(tournamentName, table);
 	}
 
 	@RequestMapping(value = "/tournaments/{tournamentId}/rounds/generate", method = RequestMethod.PUT)
