@@ -15,7 +15,6 @@ import de.jet.tournaments.model.Player;
 import de.jet.tournaments.model.Round;
 import de.jet.tournaments.model.Table;
 import de.jet.tournaments.model.Team;
-import de.jet.tournaments.persistence.TableDataStore;
 import de.jet.tournaments.persistence.TournamentDataStore;
 
 @Component
@@ -23,15 +22,12 @@ public class RoundCalculator
 {
 	private final TournamentDataStore tournamentDataStore;
 	private final SkippedRoundsCalculator skippedRoundsCalculator;
-	private final TableDataStore tableDataStore;
 
 	@Autowired
-	public RoundCalculator(TournamentDataStore tournamentDataStore, SkippedRoundsCalculator skippedRoundsCalculator,
-			TableDataStore tableDataStore)
+	public RoundCalculator(TournamentDataStore tournamentDataStore, SkippedRoundsCalculator skippedRoundsCalculator)
 	{
 		this.tournamentDataStore = Objects.requireNonNull(tournamentDataStore);
 		this.skippedRoundsCalculator = skippedRoundsCalculator;
-		this.tableDataStore = tableDataStore;
 	}
 
 	public Round generateNewRound(String tournamentName)
@@ -52,13 +48,13 @@ public class RoundCalculator
 			round.addMatch(match);
 		}
 
-		return this.addTablesToRound(round);
+		return this.addTablesToRound(tournamentName, round);
 	}
 
-	public Round addTablesToRound(Round round)
+	public Round addTablesToRound(String tournamentName, Round round)
 	{
-		List<Table> activeTables = this.tableDataStore.getTables().stream().filter(table -> table.isActive())
-				.collect(Collectors.toList());
+		List<Table> activeTables = this.tournamentDataStore.getTournamentByName(tournamentName).getTables().stream()
+				.filter(table -> table.isActive()).collect(Collectors.toList());
 		Collections.shuffle(activeTables);
 
 		List<Match> matchesWithoutRounds = round.getMatches().stream().filter(match -> match.getTableName() == null)

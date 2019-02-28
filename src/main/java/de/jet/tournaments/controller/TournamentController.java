@@ -147,14 +147,14 @@ public class TournamentController
 	}
 
 	@RequestMapping(value = "/tournaments/{tournamentId}/rounds/{roundName}/matches", method = RequestMethod.PUT)
-	public ResponseEntity<Match> putMatch(@PathVariable String tournamentId, @PathVariable String roundName,
+	public ResponseEntity<Match> putMatch(@PathVariable String tournamentName, @PathVariable String roundName,
 			@RequestBody Match match) throws JsonProcessingException
 	{
-		Match putMatch = this.tournamentDataStore.putMatch(tournamentId, roundName, match);
+		Match putMatch = this.tournamentDataStore.putMatch(tournamentName, roundName, match);
 
-		Round roundWithoutTables = this.tournamentDataStore.getRoundById(tournamentId, roundName);
-		Round roundWithTables = this.roundCalculator.addTablesToRound(roundWithoutTables);
-		this.tournamentDataStore.putRound(tournamentId, roundWithTables);
+		Round roundWithoutTables = this.tournamentDataStore.getRoundById(tournamentName, roundName);
+		Round roundWithTables = this.roundCalculator.addTablesToRound(tournamentName, roundWithoutTables);
+		this.tournamentDataStore.putRound(tournamentName, roundWithTables);
 
 		return new ResponseEntity<Match>(putMatch, HttpStatus.OK);
 	}

@@ -95,9 +95,9 @@ public class TournamentDataStore
 		return round;
 	}
 
-	public Round getRoundById(String tournamentId, String roundId)
+	public Round getRoundById(String tournamentName, String roundId)
 	{
-		MatchOperation matchTournament = Aggregation.match(new Criteria("id").is(tournamentId));
+		MatchOperation matchTournament = Aggregation.match(new Criteria("name").is(tournamentName));
 		UnwindOperation unwind = Aggregation.unwind("rounds");
 		ReplaceRootOperation replaceRoot = Aggregation.replaceRoot("rounds");
 		MatchOperation matchMatch = Aggregation.match(new Criteria("name").is(roundId));

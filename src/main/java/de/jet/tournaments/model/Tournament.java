@@ -15,6 +15,7 @@ public class Tournament
 	private String name;
 	private List<Round> rounds = new ArrayList<Round>();
 	private List<Player> player = new ArrayList<Player>();
+	private List<Table> tables = new ArrayList<Table>();
 
 	public Tournament()
 	{
@@ -61,24 +62,23 @@ public class Tournament
 	public List<Player> getPlayer()
 	{
 		return this.player;
-
-		// List<Match> allMatches = new ArrayList<Match>();
-		// this.rounds.stream().map(round -> round.getMatches()).forEach(matches ->
-		// allMatches.addAll(matches));
-		//
-		// Set<Player> allPlayer = new HashSet<Player>();
-		// allMatches.stream()
-		// .map(match -> Arrays.asList(match.getTeam1().getPlayer1(),
-		// match.getTeam1().getPlayer2(),
-		// match.getTeam2().getPlayer1(), match.getTeam2().getPlayer2()))
-		// .forEach(player -> allPlayer.addAll(player));
-		//
-		// return new ArrayList<Player>(allPlayer);
 	}
 
 	public Tournament setPlayer(List<Player> player)
 	{
 		this.player = player;
+
+		return this;
+	}
+
+	public List<Table> getTables()
+	{
+		return tables;
+	}
+
+	public Tournament setTables(List<Table> tables)
+	{
+		this.tables = tables;
 
 		return this;
 	}
