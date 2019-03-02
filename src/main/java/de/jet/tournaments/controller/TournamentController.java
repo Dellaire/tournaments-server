@@ -117,14 +117,14 @@ public class TournamentController
 		return this.tournamentDataStore.addTable(tournamentName, table);
 	}
 
-	@RequestMapping(value = "/tournaments/{tournamentId}/rounds/generate", method = RequestMethod.PUT)
-	public ResponseEntity<Round> putGeneratedRound(@PathVariable String tournamentId) throws JsonProcessingException
+	@RequestMapping(value = "/tournaments/{tournamentName}/rounds/generate", method = RequestMethod.PUT)
+	public ResponseEntity<Round> putGeneratedRound(@PathVariable String tournamentName) throws JsonProcessingException
 	{
 		// TODO move number calculation to other place
-		Optional<Integer> lastRoundNumber = tournamentDataStore.getTournamentById(tournamentId).getRounds().stream()
+		Optional<Integer> lastRoundNumber = tournamentDataStore.getTournamentByName(tournamentName).getRounds().stream()
 				.map(round -> Integer.parseInt(round.getName())).max((x, y) -> Integer.compare(x, y));
 
-		Round round = this.roundCalculator.generateNewRound(tournamentId);
+		Round round = this.roundCalculator.generateNewRound(tournamentName);
 		if (lastRoundNumber.isPresent())
 		{
 			round.setName(lastRoundNumber.get() + 1 + "");
@@ -133,7 +133,7 @@ public class TournamentController
 			round.setName(1 + "");
 		}
 
-		return new ResponseEntity<Round>(this.tournamentDataStore.addRound(tournamentId, round), HttpStatus.OK);
+		return new ResponseEntity<Round>(this.tournamentDataStore.addRound(tournamentName, round), HttpStatus.OK);
 	}
 
 	// @CrossOrigin

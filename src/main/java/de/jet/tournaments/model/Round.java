@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Round
 {
 	private String name;
@@ -46,6 +48,7 @@ public class Round
 		return this;
 	}
 
+	@JsonIgnore
 	public Set<Player> getPlayer()
 	{
 		Set<Player> allPlayer = new HashSet<Player>();

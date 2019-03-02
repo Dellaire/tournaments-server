@@ -91,20 +91,20 @@ public class TournamentDataStore
 		return table;
 	}
 
-	public Round addRound(String tournamentId, Round round) throws JsonProcessingException
+	public Round addRound(String tournamentName, Round round) throws JsonProcessingException
 	{
-		this.mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(tournamentId)),
+		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
 				new Update().push("rounds", round), Tournament.class);
 
 		return round;
 	}
 
-	public Round putRound(String tournamentId, Round round)
+	public Round putRound(String tournamentName, Round round)
 	{
-		this.mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(tournamentId)),
+		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
 				new Update().pull("rounds", Query.query(Criteria.where("name").is(round.getName()))), Tournament.class);
 
-		this.mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(tournamentId)),
+		this.mongoTemplate.updateFirst(Query.query(Criteria.where("name").is(tournamentName)),
 				new Update().push("rounds", round), Tournament.class);
 
 		return round;
